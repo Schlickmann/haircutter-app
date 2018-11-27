@@ -1,0 +1,48 @@
+yarn add sequelize
+--> Essa dependencia faz com que possamos manipular dados de base de dados
+em formato de javascript nao necessitando de SQL'sequelize
+
+
+yarn add sequelize-cli -D
+--> Permite usarmos a linha de comando para realizar alguns testes
+
+npx sequelize init 
+--> cria uma estrutura contendo pasta de configuracao, models, migrations
+e seeders
+
+criar o arquivo .sequelizerc para passar algumas configuracoes para 
+o sequelize saber que alteramos a estrutura inicial que ele tinha criado, ou
+seja alteramos o padrao de localizacao.
+
+* sequelize realiza a conexao com o banco de dados;
+* migrations serve para fazer o controle de versao da base de dados.
+
+****IMPORTANT COMMANDS*****
+npx sequelize migration:create --name=create-users (CRIA MIGRATIONS)
+npx sequelize migration:create --name=create-appointments
+- npx sequelize db:migrate (EXECUTA MIGRATIONS)
+
+
+yarn add pg
+--> determinar qual tipo de 'escrita' sera usada na comunicacao SQL 
+
+usar docker para manter a aplicacao isolada, assim nao impacta a maquina quando
+resolvermos apagar ou realizar alguma modificacao nos dados.
+
+yarn add bcryptjs
+--> ajuda na criptografia de senhas, modulos recomendados para criptografia
+
+yarn add multer
+--> cuida da parte de uploads na aplicacao
+
+yarn add express-session
+--> gerenciar e armazenar sessao
+
+yarn add session-file-store
+--> armazena as informacoes de sessao em um arquivo fisico
+
+yarn add connect-flash
+--> para enviar mensagens para o frontend
+
+yarn add moment
+--> para trabalhar com datas e horarios 

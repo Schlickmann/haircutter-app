@@ -46,3 +46,6 @@ yarn add connect-flash
 
 yarn add moment
 --> para trabalhar com datas e horarios 
+
+docker container utilizado
+--> docker run --name database -p 5432:5432 -d -t kartoza/postgis

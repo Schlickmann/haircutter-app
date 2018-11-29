@@ -1,9 +1,9 @@
-const { User } = require('../models')
-const { Op } = require('sequelize')
+const { User } = require("../models");
+const { Op } = require("sequelize");
 
 class DashboardController {
-  async index (req, res) {
-    const currentUser = req.session.user
+  async index(req, res) {
+    const currentUser = req.session.user;
     const providers = await User.findAll({
       where: {
         provider: true,
@@ -11,10 +11,10 @@ class DashboardController {
           [Op.ne]: currentUser.id
         }
       }
-    })
-
-    return res.render('dashboard', { providers })
+    });
+    // console.log(providers);
+    return res.render("dashboard", { providers });
   }
 }
 
-module.exports = new DashboardController()
+module.exports = new DashboardController();

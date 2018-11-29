@@ -1,0 +1,35 @@
+
+{% extends "_layouts/default.njk" %}
+
+{% block body %}
+  <div class="content">
+    <strong>Appointments</strong>
+    <p>Below you can see your future appointments, just select a date.</p>
+
+    <form action="/app/appointments" method="post">
+        <input type="text" class="flatpickr" placeholder="Choose a date..." />
+    
+        <div id="hours">
+            
+        </div>
+    </form>
+
+    <a href="/app/dashboard" class="logout">Voltar</a>
+  </div>
+
+  <script type="text/javascript">
+    {# https://flatpickr.js.org/getting-started/ #}
+        flatpickr('.flatpickr', {
+            minDate: new Date(),
+            dateFormat: 'm/d/Y',
+            onChange: function (date) {
+                fetch(`/app/appointments/data?date=${date[0].getTime()}`)
+                    .then(function (response) {
+                        response.text().then(function (html) {
+                            document.getElementById('hours').innerHTML = html
+                        })
+                    })
+            }
+        })
+    </script>
+{% endblock %}

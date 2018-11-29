@@ -1,56 +1,56 @@
-const moment = require('moment')
-const { Op } = require('sequelize')
-const { Appointment } = require('../models')
+const moment = require("moment");
+const { Op } = require("sequelize");
+const { Appointment } = require("../models");
 
 class AvailableController {
-  async index (req, res) {
+  async index(req, res) {
     // make sure that we are working with integers
-    const date = moment(parseInt(req.query.date))
+    const date = moment(parseInt(req.query.date));
 
     const appointments = await Appointment.findAll({
       where: {
         provider_id: req.params.provider,
         date: {
           [Op.between]: [
-            date.startOf('day').format(),
-            date.endOf('day').format()
+            date.startOf("day").format(),
+            date.endOf("day").format()
           ]
         }
       }
-    })
+    });
 
     const schedule = [
-      '7:30',
-      '8:30',
-      '9:30',
-      '10:30',
-      '11:30',
-      '12:30',
-      '13:30',
-      '14:30',
-      '15:30',
-      '16:30',
-      '17:30'
-    ]
+      "7:30",
+      "8:30",
+      "9:30",
+      "10:30",
+      "11:30",
+      "12:30",
+      "13:30",
+      "14:30",
+      "15:30",
+      "16:30",
+      "17:30"
+    ];
 
     const available = schedule.map(time => {
-      const [hour, minute] = time.split(':')
+      const [hour, minute] = time.split(":");
       const value = date
         .hour(hour)
         .minute(minute)
-        .second(0)
+        .second(0);
 
       return {
         time,
         value: value.format(),
         available:
           value.isAfter(moment()) &&
-          !appointments.find(a => moment(a.date).format('HH:mm') === time)
-      }
-    })
+          !appointments.find(a => moment(a.date).format("HH:mm") === time)
+      };
+    });
 
-    return res.render('available/index', { available })
+    return res.render("available/index", { available });
   }
 }
 
-module.exports = new AvailableController()
+module.exports = new AvailableController();

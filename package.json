@@ -5,7 +5,8 @@
   "author": "\"Juliani Schlickmann Damasceno\"",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon src/index.js -e js"
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js -e js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
